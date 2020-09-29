@@ -1,0 +1,6 @@
+inicio
+    se(anguloatuador() != 11)entao{
+    		girarbaixo(600)
+    		baixar(800)    
+    }
+fim

@@ -1,0 +1,139 @@
+texto CorR1 = "cor1"
+texto CorRC = "cor2"
+texto CorC = "cor3"
+texto CorLC = "cor4"
+texto CorL1 = "cor5"
+texto CorFren = "cor6"
+
+numero LuzR1 = luz(1)
+numero LuzRC = luz(2)
+numero LuzC = luz(3)
+numero LuzLC = luz(4)
+numero LuzL1 = luz(5)
+numero LuzFren = luz(6)
+
+numero UltraCC = ultra(2)
+numero UltraCB = ultra(3)
+numero UltraR = ultra(1)
+
+tarefa retornaluz{
+	LuzR1 = luz(1)
+	LuzRC = luz(2)
+	LuzC = luz(3)
+	LuzLC = luz(4)
+	LuzL1 = luz(5)
+	LuzFren = luz(6)
+}
+
+tarefa retornaultra{
+	UltraCC = ultra(2)
+	UltraCB = ultra(3)
+	UltraR = ultra(1)
+}
+
+tarefa retornacor{
+	CorR1 = cor(1)
+	CorRC = cor(2)
+	CorC = cor(3)
+	CorLC = cor(4)
+	CorL1 = cor(5)
+	CorFren = cor(6)
+}
+
+tarefa NoventaL{
+	frente(130)
+	esperar(500)
+	rotacionar(1000, negativo(90))
+} 
+
+tarefa NoventaR{
+	frente(130)
+	esperar(500)
+	rotacionar(1000, 90)
+}
+
+tarefa CurvaEsquerda{
+	frente(50)
+	esperar(500)
+	farei{
+		esquerda(300)
+		esperar(500)
+		retornacor()
+		se(CorRC == "PRETO")entao{
+			farei{
+				direita(300)
+				esperar(500)
+			}enquanto(CorC == "BRANCO")
+		}
+	}enquanto(CorC == "BRANCO")
+}
+
+tarefa CurvaDireita{
+	frente(50)
+	esperar(500)
+	farei{
+		direita(300)
+		esperar(500)
+		retornacor()
+		se(CorLC == "PRETO")entao{
+			farei{
+				esquerda(300)
+				esperar(500)
+			}enquanto(CorC == "BRANCO")
+		}
+	}enquanto(CorC == "BRANCO")
+}
+
+tarefa VerificarCurvas{
+	retornacor()
+	retornacor()
+	se(CorL1 == "PRETO" e CorLC == "PRETO")entao{
+		NoventaL()
+	}senao se(CorR1 == "PRETO" e CorRC == "PRETO")entao{
+		NoventaR()
+	}senao se(CorLC == "PRETO")entao{
+		CurvaEsquerda()
+	}senao se(CorRC == "PRETO")entao{
+		CurvaDireita()
+	}senao se(CorL1 == "PRETO" e CorLC == "PRETO" e CorC == "PRETO")entao{
+		NoventaL()
+	}senao se(CorR1 == "PRETO" e CorRC == "PRETO" e CorC == "PRETO")entao{
+		NoventaR()
+	}senao se(CorL1 == "PRETO")entao{
+		CurvaEsquerda()
+	}senao se(CorR1 == "PRETO")entao{
+		CurvaDireita()
+	}
+}
+
+tarefa Andar{
+	retornacor()
+	retornaultra()
+	retornaluz()
+	enquanto(2 > 1)farei{
+		se(CorC == "PRETO")entao{
+			mover(75, 75)
+			retornacor()
+		}senao{
+			se(CorR1 == "BRANCO" e CorRC == "BRANCO" e CorLC == "BRANCO" e CorL1 == "BRANCO" e CorC == "BRANCO")entao{
+				mover(75, 75)
+				retornacor()
+			}senao{
+				parar()
+				retornacor()
+				VerificarCurvas()
+			}
+		}
+	}
+}
+
+inicio
+	se(anguloatuador() != 11)entao{
+		girarbaixo(900)
+    		baixar(800)    
+	}
+
+	enquanto(2 > 1)farei{
+		Andar()
+	}
+fim
