@@ -1,6 +1,17 @@
-Azul = Curva pra Direita
-Vermelho = Curva pra esquerda
-Verde - Frente
-Roxo = Atuador
-Rosa = Tem vitima 
-Amarelo = Coisa na frente
+Azul = Curva pra Direita ==>
+acenderledrgb(25,25,112)
+
+Vermelho = Curva pra esquerda ==> 
+acenderledrgb(178,34,34)
+
+Verde - Frente ==> 
+acenderledrgb(60,179,113)
+
+Roxo = Atuador ==> 
+acenderledrgb(138,43,226)
+
+Rosa = Tem vitima ==> 
+acenderledrgb(255,20,147)
+
+Amarelo = Coisa na frente ==> 
+acenderledrgb	(255,215,0)
